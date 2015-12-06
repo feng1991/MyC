@@ -98,7 +98,7 @@ void mem_dump(){
 
 
 
-
+// printf string
 void dump(char* str){
 	if(str == NULL){
 		printf("NULL\n");	
@@ -107,6 +107,7 @@ void dump(char* str){
 	}
 }
 
+// printf int
 void dump_d(int i){
 	printf("%d\n",i);
 }
@@ -143,21 +144,26 @@ void build_socket(){
         signal(SIGCHLD, SIG_IGN);  
       
         char s[] = ":";
-        char* oper;
-        char* key;
-        char* value;
+        char oper[255];
+        char key[255];
+        char value[255];
         while(1)  
         {     
+            memset(buffer,0,512);
             //receive data and source  
             result = recvfrom(server_sockfd, buffer, sizeof(buffer), 0,  (struct sockaddr*)&client_addr, &client_len);  
             //if(fork() == 0)  
             //{  
                  printf("Get from client:%s\n",buffer);
+                 printf("key is %s and value is %s",key,value);
                  mem_dump();  
-                 oper = strtok(buffer,s);
-	   key = strtok(NULL,s);
+                 //oper = strtok(buffer,s);
+                 //key = strtok(NULL,s);
+                 strcpy(oper,strtok(buffer,s));
+                 strcpy(key,strtok(NULL,s));
 	   if(0 == strcmp(oper,"set")){
-		value = strtok(NULL,s);
+	   	//value = strtok(NULL,s);
+	   	strcpy(value,strtok(NULL,s));
 		mem_set(key,value);
 		strcpy(buffer,"ok");
 	   }else if(0 == strcmp(oper,"get")){		
@@ -166,6 +172,7 @@ void build_socket(){
 	   printf("Send to client:%s\n",buffer);
                 //send response 
                 sendto(server_sockfd, buffer, sizeof(buffer),0 , (struct sockaddr*)&client_addr, client_len);  
+                printf("key is %s and value is %s",key,value);
                 mem_dump();
                 //exit(0);  
             //}  

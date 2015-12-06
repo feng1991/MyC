@@ -13,7 +13,7 @@
     int main(int argc, char *argv[])  
     {  
         // prepare the string which will be send to the server
-        char c[] = "set:name:feng"; 
+        char c[255] = "set:name:feng"; 
         //char c[] = "get:name";
         if(argc > 1){
             strcpy(c,argv[1]);
