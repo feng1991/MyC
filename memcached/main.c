@@ -141,7 +141,7 @@ void build_socket(){
         //bind socket
         bind(server_sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr));  
         //ignore child process exit signal  
-        signal(SIGCHLD, SIG_IGN);  
+       //signal(SIGCHLD, SIG_IGN);  
       
         char s[] = ":";
         char oper[255];
@@ -155,8 +155,7 @@ void build_socket(){
             //if(fork() == 0)  
             //{  
                  printf("Get from client:%s\n",buffer);
-                 printf("key is %s and value is %s",key,value);
-                 mem_dump();  
+                 //mem_dump();  
                  //oper = strtok(buffer,s);
                  //key = strtok(NULL,s);
                  strcpy(oper,strtok(buffer,s));
@@ -171,8 +170,7 @@ void build_socket(){
 	   }
 	   printf("Send to client:%s\n",buffer);
                 //send response 
-                sendto(server_sockfd, buffer, sizeof(buffer),0 , (struct sockaddr*)&client_addr, client_len);  
-                printf("key is %s and value is %s",key,value);
+                sendto(server_sockfd, buffer, sizeof(buffer),0 , (struct sockaddr*)&client_addr, client_len); 
                 mem_dump();
                 //exit(0);  
             //}  
