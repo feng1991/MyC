@@ -6,20 +6,24 @@
     #include <stdlib.h>  
     #include <stdio.h>
     #include <string.h>  
-      
+    #include "tool.c"
 
-
-
-    int main(int argc, char *argv[])  
-    {  
-        // prepare the string which will be send to the server
-        char c[255] = "set:name:feng"; 
-        //char c[] = "get:name";
+   // format the input string
+    void getArgv(int argc, char *argv[],char* c){
         if(argc > 1){
-            strcpy(c,argv[1]);
+            int i = 0;
+            for(i = 1;i < argc;i ++){
+                strcat(c,argv[i]);
+                strcat(c," ");
+            }
         }
-        printf("send to server = %s\n", c);
+    }
 
+   //build socket
+   void build_socket(char* s){
+        //it not strcpy then wrong ?????
+        char c[1024];
+        strcpy(c,s);
         // socket
         char ip[] = "127.0.0.1";
         int port  = 9739;
@@ -40,5 +44,16 @@
         printf("result from server = %s\n", c);  
         //close socket 
         close(sockfd);  
-        exit(0);   
+   }
+
+
+    int main(int argc, char *argv[])  
+    {  
+        // prepare the string which will be send to the server
+        char c[1024] = ""; 
+        getArgv(argc,argv,c);
+        printf("send to server = %s\n", c);
+        //return 0;
+        build_socket(c);
+        return 0;  
     }  
