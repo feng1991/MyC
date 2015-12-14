@@ -81,7 +81,6 @@
         }else{
             printf("Send to server = %s\n", c);
         }
-        return 0;
         build_socket(c);
         return 0;  
     }  
