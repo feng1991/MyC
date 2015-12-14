@@ -18,13 +18,16 @@
         char* oper = strtolower(argv[1]);
         if(0 == strcmp(oper,"set")){
             if(argc != 4){
+                    free(oper);
                     return -1;
             }
         }else if(0 == strcmp(oper,"get")){
             if(argc != 3){
+                    free(oper);
                     return -1;
             }
         }else{
+            free(oper);
             return -1;
         }
         int i = 0;
@@ -32,6 +35,7 @@
             strcat(c,argv[i]);
             strcat(c," ");
         }
+        free(oper);
         return 1;
     }
 
