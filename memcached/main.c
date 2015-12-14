@@ -73,8 +73,6 @@ void build_socket(){
 
 
 
-
-
 int main()
 {
     while(1){
