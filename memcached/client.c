@@ -44,8 +44,10 @@
    //build socket
    void build_socket(char* s){
         //it not strcpy then wrong ?????
-        char* c;
-        c = (char*)malloc( sizeof(char) * strlen(s));
+        //can't send malloc data ????
+        //char* c;
+        //c = (char*)malloc( sizeof(char) * 512);
+        char c[512];
         strcpy(c,s);
         // socket
         char ip[] = "127.0.0.1";
@@ -67,7 +69,7 @@
         printf("Result from server = %s\n", c);  
         //close socket 
         close(sockfd);  
-        free(c);
+        //free(c);
    }
 
 
@@ -75,7 +77,7 @@
     int main(int argc, char *argv[])  
     {  
         // prepare the string which will be send to the server
-        char c[1024] = ""; 
+        char c[1024] = "";
         int res = getArgv(argc,argv,c);
         if(res == -1){
             printf("Wrong paramer!\n");
