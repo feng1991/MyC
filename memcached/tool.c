@@ -47,3 +47,7 @@ char* strtoupper(char* str){
 	}
 	return buf;
 }
+
+
+
+

@@ -11,14 +11,14 @@
 #include "tool.c"
 #include "memcache.c"
 
-
+#define BUFFER_SIZE 1024
 
 //keep running to listen and response with socket
 void build_socket(){
         int server_sockfd = -1;  
         int server_len = 0;  
         int client_len = 0;  
-        char buffer[512];  
+        char buffer[BUFFER_SIZE];  
         int result = 0;  
         int port  = 9739;
         struct sockaddr_in server_addr;  
@@ -35,25 +35,21 @@ void build_socket(){
        //signal(SIGCHLD, SIG_IGN);  
       
         char s[] = " ";
-        char oper[255];
-        char key[255];
-        char value[255];
+        char* oper;
+        char* key;
+        char* value;
         while(1)  
         {     
-            memset(buffer,0,512);
+            memset(buffer,0,BUFFER_SIZE);
             //receive data and source  
             result = recvfrom(server_sockfd, buffer, sizeof(buffer), 0,  (struct sockaddr*)&client_addr, &client_len);  
             //if(fork() == 0)  
             //{  
                  printf("Get from client:%s\n",buffer);
-                 //mem_dump();  
-                 //oper = strtok(buffer,s);
-                 //key = strtok(NULL,s);
-                 strcpy(oper,strtok(buffer,s));
-                 strcpy(key,strtok(NULL,s));
+                 oper = strtok(buffer,s);
+                 key = strtok(NULL,s);
 	   if(0 == strcmp(oper,"set")){
-	   	//value = strtok(NULL,s);
-	   	strcpy(value,strtok(NULL,s));
+	   	value = strtok(NULL,s);
 		mem_set(key,value);
 		strcpy(buffer,"ok");
 	   }else if(0 == strcmp(oper,"get")){		

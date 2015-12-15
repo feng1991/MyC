@@ -44,7 +44,8 @@
    //build socket
    void build_socket(char* s){
         //it not strcpy then wrong ?????
-        char c[1024];
+        char* c;
+        c = (char*)malloc( sizeof(char) * strlen(s));
         strcpy(c,s);
         // socket
         char ip[] = "127.0.0.1";
@@ -66,6 +67,7 @@
         printf("Result from server = %s\n", c);  
         //close socket 
         close(sockfd);  
+        free(c);
    }
 
 
@@ -81,6 +83,7 @@
         }else{
             printf("Send to server = %s\n", c);
         }
+        //return 0;
         build_socket(c);
         return 0;  
     }  

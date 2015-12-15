@@ -3,8 +3,8 @@
 
 //the key struct which store the key-value variables
 typedef struct Mem{
-	char key[255];
-	char value[255];
+	char* key;
+	char* value;
 	int ctime;
 	int utime;
 }Mem;
@@ -18,6 +18,8 @@ int mem_add(char* key,char* value){
 	if(mem_len >= MAX_MEM_LENGTH){
 		return -1;
 	}
+	mem[mem_len].key = (char*)malloc( sizeof(char) * strlen(key) );
+	mem[mem_len].value = (char*)malloc( sizeof(char) * strlen(value) );
 	strcpy(mem[mem_len].key,key);
 	strcpy(mem[mem_len].value,value);
 	int t = time(0);
