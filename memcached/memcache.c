@@ -1,5 +1,5 @@
 
-#define MAX_MEM_LENGTH 255
+#define MAX_MEM_LENGTH 1024
 
 //the key struct which store the key-value variables
 typedef struct Mem{

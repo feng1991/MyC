@@ -38,6 +38,7 @@ void build_socket(){
         char* oper;
         char* key;
         char* value;
+        int mem_result = 0;
         while(1)  
         {     
             memset(buffer,0,BUFFER_SIZE);
@@ -50,8 +51,12 @@ void build_socket(){
                  key = strtok(NULL,s);
 	   if(0 == strcmp(oper,"set")){
 	   	value = strtok(NULL,s);
-		mem_set(key,value);
-		strcpy(buffer,"ok");
+		mem_result = mem_set(key,value);
+		if(mem_result == -1){
+			strcpy(buffer,"Sorry,operation fail");
+		}else{
+			strcpy(buffer,"ok");
+		}
 	   }else if(0 == strcmp(oper,"get")){		
 		strcpy(buffer,mem_get(key));
 	   }
