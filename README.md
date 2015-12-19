@@ -10,4 +10,4 @@
 ## To do
 - Use muti-thread to response
 - Use LRU to reuse the stored key-values
-- Finish dll for php,which support muti-memcached
+- Finish .so for php,which support muti-memcached
