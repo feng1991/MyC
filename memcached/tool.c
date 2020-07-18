@@ -49,5 +49,24 @@ char* strtoupper(char* str){
 }
 
 
-
+/**
+ * read file and get all the content
+ * remember to free the return value
+ **/
+char* read_file(char* s){
+	FILE* file = fopen(s,"r");
+	int flen = 0;
+	char* str = NULL;
+	if(file == NULL){
+		dump("Could not open file",1);
+	}
+	fseek(file,0,SEEK_END);
+	flen = ftell(file);
+	fseek(file,0,SEEK_SET);
+	str = (char *)malloc(flen);
+	fread(str,1,flen,file);
+	fclose(file);
+	file = NULL;
+	return str;
+}
 
